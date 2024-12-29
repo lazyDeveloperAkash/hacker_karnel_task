@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import DashBoard from './components/Dashboard'
 import { ToastContainer } from 'react-toastify'
@@ -20,6 +20,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/dashboard' element={<DashBoard />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </>
