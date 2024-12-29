@@ -38,7 +38,7 @@ const DashBoard = () => {
     );
 
     return (
-        <div className="relative min-h-[100vh] p-6 bg-slate-100">
+        <div className={`relative min-h-[100vh] p-6 bg-slate-100 ${createProductModal && "overflow-hidden"}`}>
             <Navbar setCreateProductModal={setCreateProductModal} setSearch={setSearch} />
             {products.length === 0 ? (
                 <div className="w-full h-[70vh] flex items-center justify-center">
