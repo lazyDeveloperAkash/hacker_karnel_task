@@ -4,6 +4,7 @@ import { IoMdClose } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import CreateProduct from './CreateProduct';
+import { toast } from 'react-toastify';
 
 const DashBoard = () => {
     const [createProductModal, setCreateProductModal] = useState(false);
@@ -15,7 +16,10 @@ const DashBoard = () => {
     // Check for user authentication
     useEffect(() => {
         const user = localStorage.getItem('user_token');
-        if (!user) navigate('/');
+        if (!user){ 
+            toast.warn("Please login to access the resorce")
+            navigate('/')
+        };
     }, [navigate, products])
     
 

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io';
+import { toast } from 'react-toastify';
 
 const CreateProduct = ({ products, setProducts, setCreateProductModal }) => {
     const [newProduct, setNewProduct] = useState({
@@ -7,21 +8,23 @@ const CreateProduct = ({ products, setProducts, setCreateProductModal }) => {
         price: 0
     })
 
+    // change state
     const handleChange = (e) => {
         const { name, value } = e.target;
         setNewProduct((prevData) => ({ ...prevData, [name]: name === 'price' ? value.replace(/^0+/, '') : value }));
     };
 
-
+    // create product
     const handleSubmit = async (e) => {
         e.preventDefault();
         const isDuplicate = products.some((product) => product.name === e.target.name.value);
         if (isDuplicate) {
             setNewProduct({ name: "", price: "" });
-            alert(`alredy have a product with this name` + `${e.target.name.value}`);
+            toast.error(`alredy have a product with this name ` + `${e.target.name.value}`);
             return;
         }
-        setProducts((prevData) => ([{ ...newProduct }, ...prevData]))
+        setProducts((prevData) => ([{ ...newProduct }, ...prevData]));
+        toast.success("Product created successfully");
         setCreateProductModal(false);
     }
     return (

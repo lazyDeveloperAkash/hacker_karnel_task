@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [userData, setUserData] = useState({ email: '', password: '' });
@@ -31,13 +32,13 @@ const Login = () => {
             const { data } = await axios.post('https://reqres.in/api/login', userData);
             console.log(data)
             localStorage.setItem("user_token", data.token);
+            toast.success("Login Successfull")
             navigate('/dashboard');
         } catch (error) {
             console.log(error)
         } finally{
             setIsLoading(false);
         }
-        console.log(localStorage.getItem("user_token"))
     };
 
     return (

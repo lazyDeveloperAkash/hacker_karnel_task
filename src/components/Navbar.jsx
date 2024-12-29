@@ -2,12 +2,16 @@ import { BiTask } from "react-icons/bi";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { IoSearch } from 'react-icons/io5';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Navbar = ({ setCreateProductModal, setSearch }) => {
     const navigate = useNavigate();
+
+    //handle logout
     const logout = () => {
         if (!window.confirm("Do you want to logout?")) return;
         localStorage.removeItem("user_token");
+        toast.success("Logout Successfull")
         navigate('/');
     }
     return (
@@ -25,11 +29,13 @@ const Navbar = ({ setCreateProductModal, setSearch }) => {
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => setCreateProductModal(true)}
-                        className='flex items-center justify-between px-1 md:px-4 py-2 rounded-md bg-[#3998c0] text-white cursor-pointer'>
+                        className='flex items-center justify-between px-1 md:px-4 py-2 rounded-md bg-[#3998c0] text-white cursor-pointer'
+                        >
                         <BiTask />
                         <p className="md:text-sm text-xs md:pl-2">Create Product</p>
                     </button>
-                    <div onClick={logout}>
+                    <div className="cursor-pointer"
+                    onClick={logout}>
                         <HiOutlineDotsVertical />
                     </div>
                 </div>
